@@ -5,7 +5,7 @@ import { Request, Response } from 'express';
 
 const purchaseProduct = async (req: Request, res: Response) => {
 
-    const productId: number = Number(req.params.id);
+    const productId: number = Number(req.body.productId);
     const product = Product.find((element: any) => element.id === productId); // get product to purchase
 
     if (!product)
@@ -25,7 +25,11 @@ const getAllProducts = async (req: Request, res: Response) => {
 
     if (!Product)
         return JSONResponse.success(req, res, 'products do not exist'); // check if products exist 
-    return JSONResponse.success(req, res, 'showing all products', Product);
+
+    setTimeout(() => {
+        return JSONResponse.success(req, res, 'showing all products', Product);
+    }, 3000);
+
 
 };
 
