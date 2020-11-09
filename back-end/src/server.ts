@@ -1,5 +1,8 @@
 import http from 'http';
 import app from './app';
+if (process.env.NODE_ENV !== "production") {
+  require("dotenv").config();
+}
 
 class Server {
   public server: http.Server;
@@ -7,7 +10,7 @@ class Server {
 
   constructor(port?: string | number) {
     this.server = http.createServer(app);
-    this.port = port || 3000;
+    this.port = process.env.PORT || 4000;
     this.listenToPort(this.port);
   }
 
