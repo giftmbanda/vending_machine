@@ -25,12 +25,7 @@ const getAllProducts = async (req: Request, res: Response) => {
 
     if (!Product)
         return JSONResponse.success(req, res, 'products do not exist'); // check if products exist 
-
-    setTimeout(() => {
-        return JSONResponse.success(req, res, 'showing all products', Product);
-    }, 3000);
-
-
+    return JSONResponse.success(req, res, 'showing all products', Product);
 };
 
 export = { purchaseProduct, getAllProducts };
