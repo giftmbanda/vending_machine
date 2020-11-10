@@ -13,7 +13,7 @@ to setup this project, run the following commands on your terminal
 ```bash
 1. to clone the project `git clone https://github.com/giftmbanda/vending_machine`
 2. navigate to the project directory `cd vending_machine`
-3. navigate to the back-end folder `cd back-end`
+3. navigate to the back-end directory `cd back-end`
 4. install necessary packages, modules `npm install`
 5. to run the project run `npm start`
 6. using POSTMAN you can use this default url of `http://localhost:4000`
