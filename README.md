@@ -5,7 +5,7 @@ coins and returns coins if there is no item.
 ## Dependencies
 [NodeJs](https://nodejs.org/en/) - A JavaScript runtime environment\
 [Express](https://expressjs.com/) - A NodeJs framework\
-[React](https://reactjs.org/) - A Front-end library
+[React](https://reactjs.org/) - A Front-end library\
 [TypeScript](https://www.typescriptlang.org/) - An open-source language which builds on JavaScript
 
 ## Setup and run
