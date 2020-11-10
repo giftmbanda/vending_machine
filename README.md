@@ -1,8 +1,8 @@
 # Engineer Code Challenge (Vending Machine).
-A vending machine which vends products based upon four (4) denominations (50 Cent, 1 Randa, 2 Rand and 5 Rand.
+A vending machine which vends products based upon four (4) denominations (50 Cent, 1 Rand, 2 Rand and 5 Rand.
 coins and returns coins if there is no item.
 
-## Dependecies
+## Dependencies
 [NodeJs](https://nodejs.org/en/) - A JavaScript runtime environment\
 [Express](https://expressjs.com/) - A NodeJs framework\
 [React](https://reactjs.org/) - A Front-end library

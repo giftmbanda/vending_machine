@@ -6,11 +6,10 @@ import Paper from "@material-ui/core/Paper";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import clsx from "clsx";
-import React from "react";
 import { useStyles } from "../styles/Dashboard_style";
 import Form from "./Form";
 import Information from "./Information";
-import Orders from "./Orders";
+import MyTable from "./Table";
 
 export default function Dashboard() {
   const classes = useStyles();
@@ -37,23 +36,24 @@ export default function Dashboard() {
         <div className={classes.appBarSpacer} />
         <Container maxWidth="lg" className={classes.container}>
           <Grid container spacing={3}>
-                   {/* Recent Deposits */}
+            {/* Information */}
             <Grid item xs={12} md={4} lg={3}>
               <Paper className={fixedHeightPaper}>
                 <Information />
               </Paper>
             </Grid>
-            {/* Chart */}
+
+            {/* Form */}
             <Grid item xs={12} md={8} lg={9}>
               <Paper className={fixedHeightPaper}>
                 <Form />
               </Paper>
             </Grid>
-     
-            {/* Recent Orders */}
+
+            {/* MyTable */}
             <Grid item xs={12}>
               <Paper className={classes.paper}>
-                <Orders />
+                <MyTable />
               </Paper>
             </Grid>
           </Grid>

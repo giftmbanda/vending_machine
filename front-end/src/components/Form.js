@@ -6,7 +6,6 @@ import TextField from "@material-ui/core/TextField";
 import axios from "axios";
 import React, { useState } from "react";
 import Title from "./Title";
-import SnackBar from "./SnackBar"
 
 
 const useStyles = makeStyles((theme) => ({
@@ -39,56 +38,38 @@ const initialFormData = {
 
 export default function Form() {
   const classes = useStyles();
-  const [formData, setFormData] = useState({...initialFormData});
+  const [formData, setFormData] = useState({ ...initialFormData });
   const [loading, setLoading] = useState("insert the coins then press to buy");
-  const [results, setResults] = useState([]);
-  const url = "/buy";
+  const [results, setResults] = useState();
+
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value.trim() });
   };
 
-  const handleSubmit = async(e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-     async function postData(formData) {
-      setLoading("Loading, please wait");
-      const response = await axios.post(`${url}`, formData);
-      if (response.status && response.statusText === "OK") {
-        setResults(response.data.data);
-      } else {
-        setResults(null);
-      }
-      //setFormData({...initialFormData})
-    }
-    postData(formData)
-    window.location.reload()
-    // await postData(formData)
-    // window.location.reload()
-
-    // useEffect(() => {
-    //   async function fetchData() {
-    //     setLoading(true);
-    //     const response = await axios.get(`${url}`);
-    //     setLoading(false);
-    //     if (response.status && response.statusText === "OK") {
-    //       setProducts(response.data.data);
-    //     } else {
-    //       setProducts(null);
-    //     }
-    //   }
-    //   fetchData();
-    // },[url]);
-
+    await postData(formData);
+    window.location.reload() // not best
   };
 
+  async function postData(formData) {
+    const url = "/buy";
+    const response = await axios.post(`${url}`, formData);
+    if (response.status && response.statusText === "OK") {
+      setResults(response.data);
+    } else {
+      setResults(response.data.message);
+    }
+    //setFormData({ ...initialFormData })
+  }
 
 
   return (
     <React.Fragment>
-    <SnackBar/>
       <Title>Coins</Title>
       <CssBaseline />
-      <form className={classes.form} noValidate onSubmit={handleSubmit}>
+      <form className={classes.form} onSubmit={handleSubmit}>
         <Grid container spacing={2}>
           <Grid item xs={12} sm={2}>
             <TextField

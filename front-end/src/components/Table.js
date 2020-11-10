@@ -8,7 +8,7 @@ import React, { useEffect, useState } from "react";
 //import Load from "./Load";
 import Title from "./Title";
 
-export default function Orders() {
+export default function MyTable() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
   const url = "/";
@@ -25,7 +25,7 @@ export default function Orders() {
       }
     }
     fetchData();
-  },[url]);
+  },[]);
 
   function currencyFormat(num) {
     return num.toFixed(2);
