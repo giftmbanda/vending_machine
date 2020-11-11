@@ -6,14 +6,22 @@ import Paper from "@material-ui/core/Paper";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import clsx from "clsx";
+import { useState } from "react";
 import { useStyles } from "../styles/Dashboard_style";
 import Form from "./Form";
 import Information from "./Information";
 import MyTable from "./Table";
 
-export default function Dashboard() {
+export default function Dashboard(props) {
   const classes = useStyles();
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
+  const [isSent, setIsSent] = useState();
+
+  const handleCallback = (childData) => {
+    setIsSent(childData);
+  }
+
+console.log(isSent)
 
   return (
     <div className={classes.root}>
@@ -46,14 +54,14 @@ export default function Dashboard() {
             {/* Form */}
             <Grid item xs={12} md={8} lg={9}>
               <Paper className={fixedHeightPaper}>
-                <Form />
+                <Form parentCallback={handleCallback} />
               </Paper>
             </Grid>
 
             {/* MyTable */}
             <Grid item xs={12}>
               <Paper className={classes.paper}>
-                <MyTable />
+                <MyTable data={isSent}/>
               </Paper>
             </Grid>
           </Grid>

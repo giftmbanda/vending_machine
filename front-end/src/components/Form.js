@@ -36,12 +36,11 @@ const initialFormData = {
   productId: 0
 }
 
-export default function Form() {
+export default function Form(props) {
+
   const classes = useStyles();
   const [formData, setFormData] = useState({ ...initialFormData });
   const [loading, setLoading] = useState("insert the coins then press to buy");
-  const [results, setResults] = useState();
-
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value.trim() });
@@ -50,20 +49,14 @@ export default function Form() {
   const handleSubmit = async (e) => {
     e.preventDefault()
     await postData(formData);
-    window.location.reload() // not best
+    //window.location.reload() // not best
   };
 
   async function postData(formData) {
     const url = "/buy";
     const response = await axios.post(`${url}`, formData);
-    if (response.status && response.statusText === "OK") {
-      setResults(response.data);
-    } else {
-      setResults(response.data.message);
-    }
-    //setFormData({ ...initialFormData })
+    props.parentCallback(response.data);
   }
-
 
   return (
     <React.Fragment>

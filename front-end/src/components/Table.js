@@ -1,3 +1,4 @@
+import { formatMs } from "@material-ui/core";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
@@ -5,12 +6,14 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-//import Load from "./Load";
+import Load from "./Load";
 import Title from "./Title";
+import Dashboard from '../components/Dashboard'
 
-export default function MyTable() {
+export default function MyTable(props) {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [form, setForm] = useState();
   const url = "/";
 
   useEffect(() => {
@@ -25,7 +28,7 @@ export default function MyTable() {
       }
     }
     fetchData();
-  },[]);
+  }, [props.data]);
 
   function currencyFormat(num) {
     return num.toFixed(2);
@@ -33,7 +36,7 @@ export default function MyTable() {
 
   return (
     <React.Fragment>
-      {/* <Load loading={loading} /> */}
+      <Load loading={loading} />
       <Title>Products</Title>
       <Table size="small">
         <TableHead>
