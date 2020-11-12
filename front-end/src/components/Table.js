@@ -1,4 +1,3 @@
-import { formatMs } from "@material-ui/core";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
@@ -8,31 +7,28 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Load from "./Load";
 import Title from "./Title";
-import Dashboard from '../components/Dashboard'
+
 
 export default function MyTable(props) {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [form, setForm] = useState();
-  const url = "/";
 
   useEffect(() => {
-    async function fetchData() {
+    const fetchData = async () => {
+      const url = "/";
       setLoading(true);
       const response = await axios.get(`${url}`);
       setLoading(false);
-      if (response.status && response.statusText === "OK") {
-        setProducts(response.data.data);
-      } else {
-        setProducts(null);
-      }
+      setProducts(response.data.data);
     }
     fetchData();
-  }, [props.data]);
+  }, [props.formResponse]);
 
-  function currencyFormat(num) {
+
+  const currencyFormat = (num) => {
     return num.toFixed(2);
   }
+
 
   return (
     <React.Fragment>
@@ -41,21 +37,11 @@ export default function MyTable(props) {
       <Table size="small">
         <TableHead>
           <TableRow>
-            <TableCell>
-              <b>Name</b>
-            </TableCell>
-            <TableCell>
-              <b>Price</b>
-            </TableCell>
-            <TableCell>
-              <b>Category</b>
-            </TableCell>
-            <TableCell>
-              <b>Quantity</b>
-            </TableCell>
-            <TableCell>
-              <b>Item Location</b>
-            </TableCell>
+            <TableCell><b>Name</b></TableCell>
+            <TableCell><b>Price</b></TableCell>
+            <TableCell><b>Category</b></TableCell>
+            <TableCell><b>Quantity</b></TableCell>
+            <TableCell><b>Item Location</b></TableCell>
           </TableRow>
         </TableHead>
         <TableBody>

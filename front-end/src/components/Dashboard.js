@@ -12,16 +12,19 @@ import Form from "./Form";
 import Information from "./Information";
 import MyTable from "./Table";
 
-export default function Dashboard(props) {
+export default function Dashboard() {
   const classes = useStyles();
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
-  const [isSent, setIsSent] = useState();
+  const [response, setResponse] = useState('');
 
-  const handleCallback = (childData) => {
-    setIsSent(childData);
+
+  const handleCallback = (formResponse) => {
+    setResponse(formResponse);
   }
 
-console.log(isSent)
+
+  console.log(response)
+
 
   return (
     <div className={classes.root}>
@@ -33,8 +36,7 @@ console.log(isSent)
             variant="h6"
             color="inherit"
             noWrap
-            className={classes.title}
-          >
+            className={classes.title}>
             Vending Machine - Standard Bank
           </Typography>
         </Toolbar>
@@ -61,7 +63,7 @@ console.log(isSent)
             {/* MyTable */}
             <Grid item xs={12}>
               <Paper className={classes.paper}>
-                <MyTable data={isSent}/>
+                <MyTable formResponse={response} />
               </Paper>
             </Grid>
           </Grid>

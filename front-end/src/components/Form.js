@@ -37,26 +37,24 @@ const initialFormData = {
 }
 
 export default function Form(props) {
-
   const classes = useStyles();
   const [formData, setFormData] = useState({ ...initialFormData });
-  const [loading, setLoading] = useState("insert the coins then press to buy");
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value.trim() });
   };
 
+  
   const handleSubmit = async (e) => {
     e.preventDefault()
+    const postData = async (formData) => {
+      const url = "/buy";
+      const response = await axios.post(`${url}`, formData);
+      props.parentCallback(response.data); //send the response to parent component
+    }
     await postData(formData);
-    //window.location.reload() // not best
   };
 
-  async function postData(formData) {
-    const url = "/buy";
-    const response = await axios.post(`${url}`, formData);
-    props.parentCallback(response.data);
-  }
 
   return (
     <React.Fragment>
@@ -121,9 +119,8 @@ export default function Form(props) {
           variant="contained"
           color="primary"
           className={classes.submit}
-          onClick={handleSubmit}
-        >
-          {loading}
+          onClick={handleSubmit}>
+          {`insert the coins then press to buy`}
         </Button>
       </form>
     </React.Fragment>
