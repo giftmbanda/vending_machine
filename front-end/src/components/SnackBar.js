@@ -1,34 +1,22 @@
-// import React from 'react';
-// import Snackbar from '@material-ui/core/Snackbar';
+// import { ToastContainer } from 'react-tiny-toast';
+// import { toast } from 'react-tiny-toast';
+// import React, { useEffect, useState } from "react";
 
-// export default function PositionedSnackbar(props) {
-//   const [state, setState] = React.useState({
-//     open: false,
-//     vertical: 'top',
-//     horizontal: 'center',
-//   });
 
-//   const { vertical, horizontal, open } = props;
-
-//   const handleClick = (newState) => () => {
-//     setState({ open: true, ...newState });
-//   };
-
-//   const handleClose = () => {
-//     setState({ ...state, open: false });
-//   };
-
-//   return (
-//     <div>
-//       <Snackbar
-//         anchorOrigin={{ vertical, horizontal }}
-//         open={open}
-//         onClose={handleClose}
-//         message="I love snacks"
-//         key={vertical + horizontal}
-//       />
-//     </div>
-//   );
+// const ChildComponent = () => {
+//   useEffect(() => {
+//      toast.show('You have successfully seen the toast notification.', { timeout: 3000 })
+//   }, [])
 // }
 
 
+// const SnackBar = () => {
+//   return (
+//     <>
+//     <ToastContainer />
+//     <ChildComponent />
+//     </>
+//   )
+// }
+
+// export default SnackBar;

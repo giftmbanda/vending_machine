@@ -9,9 +9,10 @@ import Load from "./Load";
 import Title from "./Title";
 
 
-export default function MyTable(props) {
+const MyTable = (props) => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
+  const formResponse = props.formResponse;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -22,7 +23,7 @@ export default function MyTable(props) {
       setProducts(response.data.data);
     }
     fetchData();
-  }, [props.formResponse]);
+  }, [formResponse]);
 
 
   const currencyFormat = (num) => {
@@ -31,7 +32,7 @@ export default function MyTable(props) {
 
 
   return (
-    <React.Fragment>
+    <>
       <Load loading={loading} />
       <Title>Products</Title>
       <Table size="small">
@@ -56,6 +57,8 @@ export default function MyTable(props) {
           ))}
         </TableBody>
       </Table>
-    </React.Fragment>
+    </>
   );
 }
+
+export default MyTable;

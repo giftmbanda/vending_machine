@@ -12,7 +12,8 @@ import Form from "./Form";
 import Information from "./Information";
 import MyTable from "./Table";
 
-export default function Dashboard() {
+
+const Dashboard = () => {
   const classes = useStyles();
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
   const [response, setResponse] = useState('');
@@ -72,3 +73,6 @@ export default function Dashboard() {
     </div>
   );
 }
+
+
+export default Dashboard;

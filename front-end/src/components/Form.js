@@ -1,32 +1,12 @@
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Grid from "@material-ui/core/Grid";
-import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import axios from "axios";
 import React, { useState } from "react";
+import { useStyles } from "../styles/Form_style";
 import Title from "./Title";
 
-
-const useStyles = makeStyles((theme) => ({
-  paper: {
-    marginTop: theme.spacing(8),
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-  },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
-  },
-  form: {
-    width: "100%", // Fix IE 11 issue.
-    marginTop: theme.spacing(3),
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-  },
-}));
 
 const initialFormData = {
   fiftyCentQuantity: 0,
@@ -36,15 +16,16 @@ const initialFormData = {
   productId: 0
 }
 
-export default function Form(props) {
+const Form = (props) => {
   const classes = useStyles();
   const [formData, setFormData] = useState({ ...initialFormData });
+
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value.trim() });
   };
 
-  
+
   const handleSubmit = async (e) => {
     e.preventDefault()
     const postData = async (formData) => {
@@ -57,13 +38,14 @@ export default function Form(props) {
 
 
   return (
-    <React.Fragment>
+    <>
       <Title>Coins</Title>
       <CssBaseline />
       <form className={classes.form} onSubmit={handleSubmit}>
         <Grid container spacing={2}>
           <Grid item xs={12} sm={2}>
             <TextField
+              autoFocus
               name="fiftyCentQuantity"
               variant="outlined"
               id="fiftyCentQuantity"
@@ -123,6 +105,8 @@ export default function Form(props) {
           {`insert the coins then press to buy`}
         </Button>
       </form>
-    </React.Fragment>
+    </>
   );
 }
+
+export default Form;
