@@ -6,39 +6,44 @@ import axios from "axios";
 import React, { useState } from "react";
 import { useStyles } from "../styles/Form_style";
 import Title from "./Title";
-
+import SnackBar from "./SnackBar";
 
 const initialFormData = {
   fiftyCentQuantity: 0,
   oneRandQuantity: 0,
   twoRandQuantity: 0,
   fiveRandQuantity: 0,
-  productId: 0
-}
+  productId: 0,
+};
+
+const initialSnackBarInfo = {
+  open: false,
+  message: "",
+};
 
 const Form = (props) => {
   const classes = useStyles();
   const [formData, setFormData] = useState({ ...initialFormData });
-
+  const [SnackBarInfo, setSnackBarInfo] = useState({ ...initialSnackBarInfo });
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value.trim() });
   };
 
-
   const handleSubmit = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
     const postData = async (formData) => {
       const url = "/buy";
       const response = await axios.post(`${url}`, formData);
       props.parentCallback(response.data); //send the response to parent component
-    }
+      setSnackBarInfo({open: true, message: response.data.message});
+    };
     await postData(formData);
   };
 
-
   return (
     <>
+      <SnackBar SnackBarInfo={SnackBarInfo} />
       <Title>Coins</Title>
       <CssBaseline />
       <form className={classes.form} onSubmit={handleSubmit}>
@@ -101,12 +106,13 @@ const Form = (props) => {
           variant="contained"
           color="primary"
           className={classes.submit}
-          onClick={handleSubmit}>
+          onClick={handleSubmit}
+        >
           {`insert the coins then press to buy`}
         </Button>
       </form>
     </>
   );
-}
+};
 
 export default Form;

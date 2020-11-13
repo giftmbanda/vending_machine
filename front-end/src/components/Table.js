@@ -8,7 +8,6 @@ import React, { useEffect, useState } from "react";
 import Load from "./Load";
 import Title from "./Title";
 
-
 const MyTable = (props) => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -21,15 +20,13 @@ const MyTable = (props) => {
       const response = await axios.get(`${url}`);
       setLoading(false);
       setProducts(response.data.data);
-    }
+    };
     fetchData();
   }, [formResponse]);
 
-
   const currencyFormat = (num) => {
     return num.toFixed(2);
-  }
-
+  };
 
   return (
     <>
@@ -38,11 +35,21 @@ const MyTable = (props) => {
       <Table size="small">
         <TableHead>
           <TableRow>
-            <TableCell><b>Name</b></TableCell>
-            <TableCell><b>Price</b></TableCell>
-            <TableCell><b>Category</b></TableCell>
-            <TableCell><b>Quantity</b></TableCell>
-            <TableCell><b>Item Location</b></TableCell>
+            <TableCell>
+              <b>Name</b>
+            </TableCell>
+            <TableCell>
+              <b>Price</b>
+            </TableCell>
+            <TableCell>
+              <b>Category</b>
+            </TableCell>
+            <TableCell>
+              <b>Quantity</b>
+            </TableCell>
+            <TableCell>
+              <b>Item Location</b>
+            </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -59,6 +66,6 @@ const MyTable = (props) => {
       </Table>
     </>
   );
-}
+};
 
 export default MyTable;

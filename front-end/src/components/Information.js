@@ -2,7 +2,6 @@ import Typography from "@material-ui/core/Typography";
 import React from "react";
 import Title from "./Title";
 
-
 const Information = () => {
   return (
     <>
@@ -12,6 +11,6 @@ const Information = () => {
       </Typography>
     </>
   );
-}
+};
 
 export default Information;
