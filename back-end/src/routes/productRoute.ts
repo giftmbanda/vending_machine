@@ -3,7 +3,7 @@ const router = express.Router()
 import coinController from '../controllers/coinController';
 
 
-router.post("/buy", coinController.purchaseProduct);
+router.post("/", coinController.purchaseProduct);
 router.get("/", coinController.getAllProducts);
 
 export default router;

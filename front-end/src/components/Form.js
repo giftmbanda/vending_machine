@@ -33,7 +33,7 @@ const Form = (props) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const postData = async (formData) => {
-      const url = "/buy";
+      const url = "/";
       const response = await axios.post(`${url}`, formData);
       props.parentCallback(response.data); //send the response to parent component
       setSnackBarInfo({open: true, message: response.data.message});
