@@ -6,7 +6,6 @@ import Paper from "@material-ui/core/Paper";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import clsx from "clsx";
-import { useState } from "react";
 import { useStyles } from "../styles/Dashboard_style";
 import Form from "./Form";
 import Information from "./Information";
@@ -15,13 +14,6 @@ import MyTable from "./Table";
 const Dashboard = () => {
   const classes = useStyles();
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
-  const [response, setResponse] = useState("");
-
-  const handleCallback = (formResponse) => {
-    setResponse(formResponse);
-  };
-
-  //console.log(response);
 
   return (
     <div className={classes.root}>
@@ -54,14 +46,14 @@ const Dashboard = () => {
             {/* Form */}
             <Grid item xs={12} md={8} lg={9}>
               <Paper className={fixedHeightPaper}>
-                <Form parentCallback={handleCallback} />
+                <Form />
               </Paper>
             </Grid>
 
             {/* MyTable */}
             <Grid item xs={12}>
               <Paper className={classes.paper}>
-                <MyTable formResponse={response} />
+                <MyTable />
               </Paper>
             </Grid>
           </Grid>

@@ -7,24 +7,27 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Load from "./Load";
 import Title from "./Title";
+import { useSelector } from "react-redux";
 
-const MyTable = (props) => {
+const MyTable = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
-  const formResponse = props.formResponse;
+  const formSubmissionFlag = useSelector((state) => state.form);
 
   useEffect(() => {
-    const fetchData = async () => {
-      const url = "/";
+    
+    const fetch = async () => {
       setLoading(true);
-      const response = await axios.get(`${url}`);
+      const products = await fetchData();
+      setProducts(products.data.data);
       setLoading(false);
-      setProducts(response.data.data);
     };
-    fetchData();
-  }, [formResponse]);
 
-  const currencyFormat = (num) => {
+    fetch();
+  }, [formSubmissionFlag]);
+
+
+  const formatCurrency = (num) => {
     return num.toFixed(2);
   };
 
@@ -53,10 +56,10 @@ const MyTable = (props) => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {products.map((row) => (
-            <TableRow key={row.id}>
+          {products.map((row, index) => (
+            <TableRow key={index}>
               <TableCell>{row.name}</TableCell>
-              <TableCell>{currencyFormat(row.price)}</TableCell>
+              <TableCell>{formatCurrency(row.price)}</TableCell>
               <TableCell>{row.type}</TableCell>
               <TableCell>{row.quantity}</TableCell>
               <TableCell>{row.id}</TableCell>
@@ -69,3 +72,23 @@ const MyTable = (props) => {
 };
 
 export default MyTable;
+
+// const columnHeaders = [
+//   { title: "Name" },
+//   { title: "Price" },
+//   { title: "Category" },
+//   { title: "Quantity" },
+//   { title: "Item Location" },
+// ];
+
+// {columnHeaders.map((col, index) => (
+//   <TableCell key={index}>
+//     <TableCell>
+//       <b>{col.title}</b>
+//     </TableCell>
+//   </TableCell>
+// ))}
+
+const fetchData = async () => {
+  return await axios.get("/");
+};

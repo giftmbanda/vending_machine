@@ -15,8 +15,6 @@ const SnackBar = (props) => {
     else open = false;
   };
 
-  console.log(props.SnackBarInfo);
-
   return (
     <>
       <Snackbar

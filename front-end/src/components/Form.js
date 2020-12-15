@@ -6,7 +6,9 @@ import axios from "axios";
 import React, { useState } from "react";
 import { useStyles } from "../styles/Form_style";
 import Title from "./Title";
-import SnackBar from "./SnackBar";
+// import SnackBar from "./SnackBar";
+import { form } from "../redux/ducks/form";
+import { useDispatch } from "react-redux";
 
 const initialFormData = {
   fiftyCentQuantity: 0,
@@ -16,15 +18,13 @@ const initialFormData = {
   productId: 0,
 };
 
-const initialSnackBarInfo = {
-  open: false,
-  message: "",
-};
-
-const Form = (props) => {
+const Form = () => {
   const classes = useStyles();
   const [formData, setFormData] = useState({ ...initialFormData });
-  const [SnackBarInfo, setSnackBarInfo] = useState({ ...initialSnackBarInfo });
+  // const [SnackBarInfo, setSnackBarInfo] = useState({ ...initialSnackBarInfo });
+
+  // const userData = useSelector((state) => state.user);
+  const dispatch = useDispatch();
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value.trim() });
@@ -32,18 +32,20 @@ const Form = (props) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const postData = async (formData) => {
-      const url = "/";
-      const response = await axios.post(`${url}`, formData);
-      props.parentCallback(response.data); //send the response to parent component
-      setSnackBarInfo({open: true, message: response.data.message});
-    };
-    await postData(formData);
+
+    const response = await postData(formData);
+    dispatch(form());
+    console.log(response.data);
+    
+    // setSnackBarInfo({open: true, message: response.data.message});
   };
+
+  // console.log(userData);
 
   return (
     <>
-      <SnackBar SnackBarInfo={SnackBarInfo} />
+      {/* <SnackBar SnackBarInfo={SnackBarInfo} /> */}
+
       <Title>Coins</Title>
       <CssBaseline />
       <form className={classes.form} onSubmit={handleSubmit}>
@@ -116,3 +118,7 @@ const Form = (props) => {
 };
 
 export default Form;
+
+const postData = async (formData) => {
+  return await axios.post("/", formData);
+};
