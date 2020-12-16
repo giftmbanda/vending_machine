@@ -2,13 +2,13 @@ import axios from "axios";
 import React from "react";
 import ReactDOM from "react-dom";
 import Dashboard from "./components/Dashboard";
-import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 import store from "./redux/configureStore";
 import { Provider } from "react-redux";
 
 axios.defaults.baseURL = "http://localhost:4000";
-axios.defaults.headers.post["Content-Type"] ="application/x-www-form-urlencoded";
+axios.defaults.headers.post["Content-Type"] =
+  "application/x-www-form-urlencoded";
 
 ReactDOM.render(
   <>

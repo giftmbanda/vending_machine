@@ -7,25 +7,28 @@ const purchaseProduct = async (req: Request, res: Response) => {
 
     const productId: number = Number(req.body.productId);
     const product = Product.find((element: any) => element.id === productId); // get product to purchase
+    const insertedCoin: number = new Coin(req.body).getTotalAmount();
 
     if (!product)
-        return JSONResponse.success(req, res, 'Sorry product does not exist, returning coins'); // check if product exist
+        return JSONResponse.success(req, res, 'Sorry product location does not exist, enter correct product location'); // check if product exist
 
     if (product.quantity < 1)
-        return JSONResponse.success(req, res, 'Sorry we are out of stock, returning coins');// handle out of stock
+        return JSONResponse.success(req, res, `Sorry we are out of stock, returning back R: ${insertedCoin}`);// handle out of stock
 
-    const change: number = new Coin(req.body).getTotalAmount() - product.price; // calculate change
+    const productPrice: number = product.price;
+    const change: number = insertedCoin - productPrice; // calculate change
+
     if (change < 0)
-        return JSONResponse.success(req, res, 'Sorry you have insufficient funds, returning coins');
+        return JSONResponse.success(req, res, `Sorry you have insufficient funds, returning back R: ${insertedCoin}`);
     product.quantity -= 1; // update product quantity
-    return JSONResponse.success(req, res, 'dispensing product', { product, change });
+    return JSONResponse.success(req, res, `Dispensing ${product.name}, your change is R: ${change}`);
 }
 
 const getAllProducts = async (req: Request, res: Response) => {
 
     if (!Product)
-        return JSONResponse.success(req, res, 'products do not exist'); // check if products exist 
-    return JSONResponse.success(req, res, 'showing all products', Product);
+        return JSONResponse.success(req, res, 'Products do not exist'); // check if products exist 
+    return JSONResponse.success(req, res, 'Showing all products', Product);
 };
 
 export = { purchaseProduct, getAllProducts };

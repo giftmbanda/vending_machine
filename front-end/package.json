@@ -20,6 +20,7 @@
     "react-tiny-toast": "^1.0.2",
     "recharts": "^1.8.5",
     "redux": "^4.0.5",
+    "styled-components": "^5.2.1",
     "web-vitals": "^0.2.4"
   },
   "scripts": {

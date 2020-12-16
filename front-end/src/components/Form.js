@@ -6,9 +6,10 @@ import axios from "axios";
 import React, { useState } from "react";
 import { useStyles } from "../styles/Form_style";
 import Title from "./Title";
-// import SnackBar from "./SnackBar";
+import Toaster from "./Toaster";
 import { form } from "../redux/ducks/form";
 import { useDispatch } from "react-redux";
+
 
 const initialFormData = {
   fiftyCentQuantity: 0,
@@ -21,9 +22,7 @@ const initialFormData = {
 const Form = () => {
   const classes = useStyles();
   const [formData, setFormData] = useState({ ...initialFormData });
-  // const [SnackBarInfo, setSnackBarInfo] = useState({ ...initialSnackBarInfo });
-
-  // const userData = useSelector((state) => state.user);
+  const [status, setStatusBase] = useState("");
   const dispatch = useDispatch();
 
   const handleChange = (e) => {
@@ -34,17 +33,15 @@ const Form = () => {
     e.preventDefault();
 
     const response = await postData(formData);
+    setStatusBase({ msg: response.data.message, date: new Date() });
     dispatch(form());
-    console.log(response.data);
-    
-    // setSnackBarInfo({open: true, message: response.data.message});
   };
 
-  // console.log(userData);
 
   return (
     <>
       {/* <SnackBar SnackBarInfo={SnackBarInfo} /> */}
+      {status ? <Toaster key={status.date} status={status.msg} /> : null}
 
       <Title>Coins</Title>
       <CssBaseline />

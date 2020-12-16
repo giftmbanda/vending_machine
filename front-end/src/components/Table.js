@@ -15,7 +15,6 @@ const MyTable = () => {
   const formSubmissionFlag = useSelector((state) => state.form);
 
   useEffect(() => {
-    
     const fetch = async () => {
       setLoading(true);
       const products = await fetchData();
@@ -25,7 +24,6 @@ const MyTable = () => {
 
     fetch();
   }, [formSubmissionFlag]);
-
 
   const formatCurrency = (num) => {
     return num.toFixed(2);
@@ -37,23 +35,25 @@ const MyTable = () => {
       <Title>Products</Title>
       <Table size="small">
         <TableHead>
-          <TableRow>
-            <TableCell>
-              <b>Name</b>
-            </TableCell>
-            <TableCell>
-              <b>Price</b>
-            </TableCell>
-            <TableCell>
-              <b>Category</b>
-            </TableCell>
-            <TableCell>
-              <b>Quantity</b>
-            </TableCell>
-            <TableCell>
-              <b>Item Location</b>
-            </TableCell>
-          </TableRow>
+          {columnHeaders.map((col, index) => (
+            <TableRow key={index}>
+              <TableCell>
+                <b>{col.name}</b>
+              </TableCell>
+              <TableCell>
+                <b>{col.price}</b>
+              </TableCell>
+              <TableCell>
+                <b>{col.category}</b>
+              </TableCell>
+              <TableCell>
+                <b>{col.quantity}</b>
+              </TableCell>
+              <TableCell>
+                <b>{col.location}</b>
+              </TableCell>
+            </TableRow>
+          ))}
         </TableHead>
         <TableBody>
           {products.map((row, index) => (
@@ -73,21 +73,15 @@ const MyTable = () => {
 
 export default MyTable;
 
-// const columnHeaders = [
-//   { title: "Name" },
-//   { title: "Price" },
-//   { title: "Category" },
-//   { title: "Quantity" },
-//   { title: "Item Location" },
-// ];
-
-// {columnHeaders.map((col, index) => (
-//   <TableCell key={index}>
-//     <TableCell>
-//       <b>{col.title}</b>
-//     </TableCell>
-//   </TableCell>
-// ))}
+const columnHeaders = [
+  {
+    name: "Name",
+    price: "Price",
+    category: "Category",
+    quantity: "Quantity",
+    location: "Item Location",
+  },
+];
 
 const fetchData = async () => {
   return await axios.get("/");
