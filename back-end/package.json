@@ -6,7 +6,7 @@
   "scripts": {
     "start": "ts-node-dev --respawn src/server.ts",
     "build": "rimraf ./build && tsc",
-    "unbuild":"rimraf ./build",
+    "unbuild": "rimraf ./build",
     "dev": "nodemon --exec ts-node src/server.ts",
     "test": "mocha -r ts-node/register 'src/tests/**/*.ts'"
   },
