@@ -1,26 +1,26 @@
-# our first command is to pull a base image
-#FROM node:12.14.1-alpine3.9
+# pull a base image
 FROM node:12.14.1-alpine3.9
 
-# command is about creating a new directory
+# declaring a WORKDIR means files will be automaticaly pushed to ./app
+# make a new directory
 RUN mkdir -p /usr/src/app
 
-# assign the created folder as a working dir
-WORKDIR /. /app
+# assign the created directory as a workdir
+WORKDIR /usr/src/app
 
-# copying the ‘package.json’ file to working dir
-COPY package.json ./
+# copy the ‘package.json’ and ‘package-lock.json’ file into working directory
+COPY package*.json ./
 
 # run the ‘npm cache clean’ command
 RUN npm cache verify
 
-# run the ‘npm install’ command
+# Install node_modules
 RUN npm install
 
-#Copy the current directory . in the project to the workdir . in the image.
-COPY . .
+# copy the current directory . in the project to the workdir . in the image
+COPY ./ ./
 
-# asks the container to expose port number 3333
+# expose port 4000
 EXPOSE 4000
 
 CMD [ "npm", "start" ]
