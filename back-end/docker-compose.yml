@@ -1,6 +1,8 @@
 version: "3.9"
 services:
-  web:
-    build: .
-    ports:
-      - "4000:4000"
+    back-end:
+        container_name: loadingRoute
+        build: .
+        ports: 
+            # <Port exposed> : <Port running inside container>
+            - "4000:4000"
