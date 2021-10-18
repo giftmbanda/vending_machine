@@ -1,5 +1,5 @@
-import Coin from '../models/coinModel' // Coin class
-import Product from '../products/products';
+import Coin from '../models/coin' // Coin model
+import Product from '../models/product' // Product model
 import JSONResponse from '../utils/JSONResponse';
 import { Request, Response } from 'express';
 
