@@ -3,6 +3,7 @@ interface IProduct { // define the product interface
     id: number;
     name: string;
     quantity: string;
+    type: number;
     price: number;
 }
 
