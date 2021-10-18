@@ -1,4 +1,11 @@
-const products: any = [
+interface IProduct { // define the product interface 
+    id: number;
+    name: string;
+    quantity: string;
+    price: number;
+}
+
+const products: IProduct[] = [
     { "id": 1, "name": "Niknaks Spicy Beef 135g", "quantity": 6, "type": "Snack", "price": 11.50 },
     { "id": 2, "name": "Lunchbar Chocolate 62g", "quantity": 4, "type": "Chocolate", "price": 2.50 },
     { "id": 3, "name": "Grape Juice 300ml", "quantity": 2, "type": "Juice", "price": 16.00 },
