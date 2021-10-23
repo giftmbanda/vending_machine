@@ -16,7 +16,7 @@ const purchaseProduct = async (req: Request, res: Response) => {
     if (product.quantity < 1)
         return JSONResponse.success(req, res, `Sorry we are out of stock, returning back R: ${insertedCoin}`);// handle out of stock
 
-    const change: number = insertedCoin - product.price;; // calculate change
+    const change: number = insertedCoin - product.price; // calculate change
 
     if (change < 0)
         return JSONResponse.success(req, res, `Sorry you have insufficient funds, returning back R: ${insertedCoin}`);
