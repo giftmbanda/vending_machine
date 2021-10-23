@@ -1,4 +1,4 @@
-interface IProduct { // define the product interface 
+interface IProduct { // product interface 
     id: number;
     name: string;
     quantity: number;
