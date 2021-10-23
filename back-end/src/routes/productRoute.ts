@@ -1,7 +1,7 @@
 import express from 'express';
-const router = express.Router()
-import coinController from '../controllers/coinController';
+import coinController from '../controllers/productController';
 
+const router = express.Router()
 
 router.post("/", coinController.purchaseProduct);
 router.get("/", coinController.getAllProducts);
