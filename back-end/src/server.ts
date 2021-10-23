@@ -2,8 +2,8 @@ import http from 'http';
 import app from './app';
 
 class Server {
-  public server: http.Server;
-  public port: string | number;
+  private server: http.Server;
+  private port: string | number;
 
   constructor(port?: string | number ) {
     this.server = http.createServer(app);
@@ -13,9 +13,9 @@ class Server {
 
   private listenToPort(port: string | number): void {
     this.server.listen(port, () => {
-      console.log(`App running on http://localhost:${port}`);
+      console.log(`Server is listening on http://localhost:${port}`);
     });
   }
 }
 
-const createServer = new Server();
+const server = new Server();
