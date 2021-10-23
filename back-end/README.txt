@@ -4,7 +4,7 @@ request type : GET
 response: an array of product
 
 
-route: http://localhost:4000/buy
+route: http://localhost:4000/
 request type : POST
 body: {
     "fiftyCentQuantity": "2",
