@@ -1,5 +1,4 @@
-
-export interface IProduct { // define the product interface 
+interface IProduct { // define the product interface 
     id: number;
     name: string;
     quantity: number;
