@@ -24,7 +24,7 @@ const purchaseProduct = async (req: Request, res: Response) => {
     return JSONResponse.success(res, `Dispensing ${product.name}, your change is R: ${change}`);
 }
 
-const getAllProducts = async (res: Response) => {
+const getAllProducts = async (req: Request, res: Response) => {
 
     if (!Products) // check if products exist
         return JSONResponse.success(res, `Products do not exist`); 
