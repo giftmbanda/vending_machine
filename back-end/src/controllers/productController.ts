@@ -8,7 +8,7 @@ const purchaseProduct = async (req: Request, res: Response) => {
 
     const productId: number = Number(req.body.productId);
     const insertedCoin: number = new Coin(req.body).getTotalAmount();
-    const product: IProduct | undefined = Product.find((element: IProduct) => element.id === productId); // get product to purchase
+    const product: IProduct | undefined = Product.find((element: IProduct) => element.id === productId); // get product by productId
    
     if (!product) // check if product location exist
         return JSONResponse.success(req, res, `Sorry product location does not exist, enter correct product location`); 
