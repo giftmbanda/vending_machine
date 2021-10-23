@@ -18,7 +18,7 @@ const purchaseProduct = async (req: Request, res: Response) => {
 
     const change: number = insertedCoin - product.price; // calculate change
 
-    if (change < 0)
+    if (change < 0) // check if there is change
         return JSONResponse.success(req, res, `Sorry you have insufficient funds, returning back R: ${insertedCoin}`);
     product.quantity -= 1; // update product quantity
     return JSONResponse.success(req, res, `Dispensing ${product.name}, your change is R: ${change}`);
@@ -26,7 +26,7 @@ const purchaseProduct = async (req: Request, res: Response) => {
 
 const getAllProducts = async (req: Request, res: Response) => {
 
-    if (!Product) // check for products 
+    if (!Product) // check if there products 
         return JSONResponse.success(req, res, `Products do not exist`); 
     return JSONResponse.success(req, res, `Showing all products`, Product);
 };
