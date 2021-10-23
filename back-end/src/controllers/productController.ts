@@ -6,9 +6,9 @@ import JSONResponse from '../utils/JSONResponse';
 
 const purchaseProduct = async (req: Request, res: Response) => {
 
-    const productId: number = Number(req.body.productId);
-    const insertedCoin: number = new Coin(req.body).getTotalAmount();
-    const product: IProduct | undefined = Products.find((product: IProduct) => product.id === productId); // get product by id
+    const productId: number = Number(req.body.productId); // get product id from request body
+    const insertedCoin: number = new Coin(req.body).getTotalAmount(); // get total sum of inserted coins from request body
+    const product: IProduct | undefined = Products.find((product: IProduct) => product.id === productId); // get product by product id
    
     if (!product) // check if product location exist
         return JSONResponse.success(req, res, `Sorry product location does not exist, enter correct product location`); 
@@ -16,9 +16,9 @@ const purchaseProduct = async (req: Request, res: Response) => {
     if (product.quantity < 1) // check if product has stock
         return JSONResponse.success(req, res, `Sorry we are out of stock, returning back R: ${insertedCoin}`); 
 
-    const change: number = insertedCoin - product.price; // calculate change
+    const change: number = insertedCoin - product.price; // calculate the change
 
-    if (change < 0) // check if there is change
+    if (change < 0) // check if there's sufficient funds to purchase
         return JSONResponse.success(req, res, `Sorry you have insufficient funds, returning back R: ${insertedCoin}`);
     product.quantity -= 1; // update product quantity
     return JSONResponse.success(req, res, `Dispensing ${product.name}, your change is R: ${change}`);
@@ -26,12 +26,12 @@ const purchaseProduct = async (req: Request, res: Response) => {
 
 const getAllProducts = async (req: Request, res: Response) => {
 
-    if (!Products) // check if there products 
+    if (!Products) // check if products exist
         return JSONResponse.success(req, res, `Products do not exist`); 
     return JSONResponse.success(req, res, `Showing all products`, Products);
 };
 
-interface IProduct { // product interface 
+interface IProduct { // we used this product interface on line 11 
     id: number;
     name: string;
     quantity: number;
