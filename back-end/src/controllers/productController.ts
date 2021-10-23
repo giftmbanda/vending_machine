@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import Coin from '../models/coinModel'; // Coin model
-import Product from '../models/productModel'; // Product model
+import Products from '../models/productModel'; // Product model
 import JSONResponse from '../utils/JSONResponse';
 
 
@@ -8,7 +8,7 @@ const purchaseProduct = async (req: Request, res: Response) => {
 
     const productId: number = Number(req.body.productId);
     const insertedCoin: number = new Coin(req.body).getTotalAmount();
-    const product: IProduct | undefined = Product.find((element: IProduct) => element.id === productId); // get product by id
+    const product: IProduct | undefined = Products.find((product: IProduct) => product.id === productId); // get product by id
    
     if (!product) // check if product location exist
         return JSONResponse.success(req, res, `Sorry product location does not exist, enter correct product location`); 
@@ -26,9 +26,9 @@ const purchaseProduct = async (req: Request, res: Response) => {
 
 const getAllProducts = async (req: Request, res: Response) => {
 
-    if (!Product) // check if there products 
+    if (!Products) // check if there products 
         return JSONResponse.success(req, res, `Products do not exist`); 
-    return JSONResponse.success(req, res, `Showing all products`, Product);
+    return JSONResponse.success(req, res, `Showing all products`, Products);
 };
 
 interface IProduct { // product interface 
