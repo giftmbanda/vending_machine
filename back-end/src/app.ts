@@ -1,4 +1,3 @@
-import bodyParser from 'body-parser';
 import cors from "cors";
 import express, { Application, Request, Response } from 'express';
 import router from './routes/productRoute';
@@ -10,7 +9,7 @@ class App {
     constructor() {
         this.app = express();
         this.app.use(cors());
-        this.app.use(bodyParser.json({ limit: '50mb' }));
+        this.app.use(express.json({ limit: '50mb' }));
         this.loadRoutes();
     }
 
